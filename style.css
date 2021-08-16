@@ -1,3 +1,11 @@
 body { 
-    background-color: blanchedalmond;
+    padding-top: 150px;
+    background-color: #525151;
+    color: white;
+    text-align: center;
+
+}
+
+a {
+    text-decoration: none;
 }
