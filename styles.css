@@ -122,8 +122,8 @@ h1 {
   background-color: rgb(255, 255, 255);
   opacity: 0.8;
 
-  width: 25em;
-  height: 25em;
+  width: 400px;
+  height: 400px;
 
   margin: 1em;
   padding: 0;  
@@ -135,49 +135,63 @@ h1 {
 
   display: flex;
   justify-content: space-between;
-  flex-direction: column;
-  align-items: baseline;
+  flex-direction: column; 
+  align-items: center;
 }
 
-.card-image-container {
+@media (max-width: 450px) {
+  .project-card {
+    width: 250px;
+    height: 250px;
+  }
+}
+
+.project-card .image-text-content {
+  /* background-color: rgb(86, 82, 45); */
   margin: 0;
-  padding: 0;
+  height: 90%;
+  width: 100%;
+}
+
+.project-card .image-content {
+  margin: 0;
   height: 50%;
   width: 100%;
 }
 
-.card-image-container img {
+.project-card img {
   height: 100%;
   width: 100%;
   object-fit: cover;
 }
 
 .project-card h2 {
+  /* background-color: orange; */
+  margin: 1%;
+  padding: 0;
   color: var(--darkest-gray);
-  margin: 0;
-  padding: 2%;
+  
+  font-size: 2em;
+
   text-align: left;
-  font-weight: normal;
+  font-weight: bold;
+  font-style: italic;
 }
 
 .project-card p {
+  /* background-color: purple; */
+  margin: 1%;
+  padding: 0;
   color: var(--darkest-gray);
-  margin: 0;
-  padding: 2%;
   text-align: justify;
   text-align: justify;
-  height: 20%;
 }
 
-.skills-container-container {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-.skills-container {
+.skills-content {
+  /* background-color: blanchedalmond; */
   margin: 0;
   padding: 0%;
+  height: 10%;
   width: 90%;
 
   display: flex;
