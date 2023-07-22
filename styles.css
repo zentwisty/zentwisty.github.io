@@ -53,7 +53,7 @@ h1 {
   background-color: var(--light-gray);
   color: var(--dark-gray);
   opacity: 0.25;
-  border: 0.1em solid var(--dark-gray);
+  border: 0.07em solid var(--dark-gray);
   
   --transition-time: 0.3s;
   transition:
@@ -72,7 +72,7 @@ h1 {
 
 .role-choice p {
   white-space: nowrap;
-  margin: 0em;
+  margin: 0;
   user-select: none;
 }
 
@@ -80,13 +80,13 @@ h1 {
   background-color: var(--white);
   color: var(--darkest-gray);
   opacity: 0.8;
-  border: 0.1em solid var(--darkest-gray);
+  border: 0.07em solid var(--darkest-gray);
 }
 
 .role-choice.spotlighted {
   color: var(--darkest-gray);
   opacity: 1;
-  border: 0.1em solid var(--darkest-gray);
+  border: 0.07em solid var(--darkest-gray);
 }
 
 .role-choice.gamedesign.spotlighted {
@@ -109,4 +109,90 @@ h1 {
   cursor: pointer;
   transform: scale(1.04) translate(0, -0.1em);
   opacity: 1;
+}
+
+.project-container {
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  flex-wrap: wrap;
+}
+
+.project-card {
+  background-color: rgb(255, 255, 255);
+  opacity: 0.8;
+
+  width: 25em;
+  height: 25em;
+
+  margin: 1em;
+  padding: 0;  
+  overflow: hidden;
+
+  border-radius: 3em;
+  /* the following defaults will only show at the beginning */
+  border: 0.2em solid var(--white);
+
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: baseline;
+}
+
+.card-image-container {
+  margin: 0;
+  padding: 0;
+  height: 50%;
+  width: 100%;
+}
+
+.card-image-container img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.project-card h2 {
+  color: var(--darkest-gray);
+  margin: 0;
+  padding: 2%;
+  text-align: left;
+  font-weight: normal;
+}
+
+.project-card p {
+  color: var(--darkest-gray);
+  margin: 0;
+  padding: 2%;
+  text-align: justify;
+  text-align: justify;
+  height: 20%;
+}
+
+.skills-container-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.skills-container {
+  margin: 0;
+  padding: 0%;
+  width: 90%;
+
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  flex-wrap: wrap-reverse;
+}
+
+.skill-bubble {
+  background-color: rgb(146, 146, 146);
+  border-radius: 5em;
+  /* the following defaults will only show at the beginning */
+  border: 0.07em solid var(--dark-gray);
+
+  margin: 0.2em;
+  padding: 0.2em 0.7em;
+  font-family: 'Courier New', Courier, monospace;
 }
