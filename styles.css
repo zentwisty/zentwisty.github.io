@@ -42,7 +42,7 @@ h1 {
   }
 }
 
-.role-choice-container {
+#role-choice-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -117,7 +117,7 @@ h1 {
   opacity: 1;
 }
 
-.project-container {
+#projects-container {
   margin-top: 1em;
   display: flex;
   justify-content: center;
@@ -258,4 +258,8 @@ h1 {
   margin: 0.2em;
   padding: 0.2em 0.7em;
   font-family: 'Courier New', Courier, monospace;
+}
+
+.hidden {
+  display: none;
 }
