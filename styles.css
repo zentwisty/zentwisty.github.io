@@ -26,19 +26,43 @@ h1 {
   font-weight: normal;
   font-size: 5em;
   text-align: center;
-  margin: 0.1em;
+  margin: 0;
+  padding: 0;
   color: var(--white);
+}
+
+.intro {
+  font-size: 1.7em;
+  padding: 1em ;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.intro p {
+  margin: 0;
+  padding: 0;
+  max-width: 800px
 }
 
 @media (max-width: 700px) {
   h1 {
     font-size: 2.9em;
   }
+  .intro {
+    font-size: 1.3em;
+    padding: 0.5em ;
+  }
 }
 
 @media (max-width: 400px) {
   h1 {
     font-size: 2em;
+  }
+  .intro {
+    font-size: 1em;
+    padding: 0.4em ;
   }
 }
 
@@ -226,7 +250,7 @@ h1 {
 
   text-align: left;
   font-weight: bold;
-  font-style: italic;
+  /* font-style: italic; */
 }
 
 .project-card-content p {
