@@ -1,0 +1,23 @@
+[
+    {
+      "roles": ["🔮", "🦚", "🎷"],
+      "imgfilename": "upbeet.gif",
+      "title": "Upbeet",
+      "description": "Root vegetabele",
+      "techs": ["Unity", "C#", "MuseScore", "Audacity"]
+    },
+    {
+      "roles": ["🦚", "🎷"],
+      "imgfilename": "augustina.gif",
+      "title": "Augustine at Home",
+      "description": "A fun and cool game",
+      "techs": ["Unity", "C#", "MuseScore", "Audacity"]
+    },
+    {
+      "roles": ["🔮", "🎷"],
+      "imgfilename": "koreananki.gif",
+      "title": "Korean Audio Sentences",
+      "description": "For studying 안녕하세요",
+      "techs": ["Python", "Anki"]
+    }
+]

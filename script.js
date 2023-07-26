@@ -71,7 +71,7 @@ function addProjectCard(projectDatapoint) {
     imageContent.classList.add('image-content');
 
     const image = document.createElement('img');
-    image.src = 'data/' + projectDatapoint.imgfilename;
+    image.src = 'images/' + projectDatapoint.imgfilename;
     image.alt = "image from " + projectDatapoint.title;
 
     imageContent.appendChild(image);
@@ -114,7 +114,7 @@ function addProjectCard(projectDatapoint) {
 
 async function fetchProjectsData() {
     try {
-        const response = await fetch('data/projects.json');
+        const response = await fetch('projects/projects.json');
         const data = await response.json();
 
         // Convert JSON data into instances of the projectData class
