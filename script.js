@@ -18,12 +18,11 @@ const visibleProjects = [];
 const hiddenProjects = [];
 
 class projectData {
-    constructor(roles, imgfilename, title, description, techs) {
+    constructor(roles, title, techs, description) {
         this.roles = roles;
-        this.imgfilename = imgfilename;
         this.title = title;
-        this.description = description;
         this.techs = techs;
+        this.description = description;
         this.projectCardElement = null;
     }
 
@@ -49,7 +48,12 @@ function addProjectCard(projectDatapoint) {
     const roleIconsContainer = document.createElement('div');
     roleIconsContainer.classList.add('role-icons');
 
-    const roleIcons = projectDatapoint.roles;
+    // add appropriate role icons
+    const roleIcons = [];
+    if (projectDatapoint.roles["gamedesign"] > 0) { roleIcons.push('🏓'); }
+    if (projectDatapoint.roles["programming"] > 0) { roleIcons.push('🔮'); }
+    if (projectDatapoint.roles["composing"] > 0) { roleIcons.push('🎷'); }
+    if (projectDatapoint.roles["art"] > 0) { roleIcons.push('🦚'); }
     roleIcons.forEach(icon => {
         const pElement = document.createElement('p');
         pElement.textContent = icon;
@@ -71,7 +75,7 @@ function addProjectCard(projectDatapoint) {
     imageContent.classList.add('image-content');
 
     const image = document.createElement('img');
-    image.src = 'images/' + projectDatapoint.imgfilename;
+    image.src = 'projects/' + projectDatapoint.title + '/thumbnail.gif';
     image.alt = "image from " + projectDatapoint.title;
 
     imageContent.appendChild(image);
@@ -114,24 +118,33 @@ function addProjectCard(projectDatapoint) {
 
 async function fetchProjectsData() {
     try {
-        const response = await fetch('projects/projects.json');
-        const data = await response.json();
-
-        // Convert JSON data into instances of the projectData class
-        const projects = data.map(item => new projectData(
-            item.roles,
-            item.imgfilename,
-            item.title,
-            item.description,
-            item.techs
-        ));
-
-        return projects;
+      const response = await fetch('projects/projects.json');
+      const data = await response.json();
+  
+      const projectPromises = data.map(async (item) => {
+        const [techsResponse, rolesResponse, descriptionResponse] = await Promise.all([
+          fetch(`projects/${item}/techs.json`),
+          fetch(`projects/${item}/roles.json`),
+          fetch(`projects/${item}/description.txt`),
+        ]);
+  
+        const [techsData, rolesData, descriptionText] = await Promise.all([
+          techsResponse.json(),
+          rolesResponse.json(),
+          descriptionResponse.text(),
+        ]);
+  
+        return new projectData(rolesData, item, techsData, descriptionText);
+      });
+  
+      const projects = await Promise.all(projectPromises);
+  
+      return projects;
     } catch (error) {
-        console.error('Error fetching projects data:', error);
-        return [];
+      console.error('Error fetching projects data:', error);
+      return [];
     }
-}
+  }
 
 // fetch projects
 (async () => {
