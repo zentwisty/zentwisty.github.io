@@ -4,6 +4,8 @@ const projectsContainer = document.getElementById("projects-container");
 const roleChoiceElements = Array.from(roleChoiceContainer.children);
 const spotlightedRoles = []
 
+const projects = []
+
 function setNoneSelectedState(areNoneSelected) {
     roleChoiceElements.forEach(element => {
         if (areNoneSelected) {
@@ -14,27 +16,24 @@ function setNoneSelectedState(areNoneSelected) {
     })
 }
 
-const visibleProjects = [];
-const hiddenProjects = [];
-
 class projectData {
     constructor(roles, title, techs, description) {
         this.roles = roles;
         this.title = title;
         this.techs = techs;
         this.description = description;
+
         this.projectCardElement = null;
+        this.isVisible = true;
     }
 
-    setHidden(isToBeHidden) {
-        if (isToBeHidden) {
-            this.projectCardElement.classList.add('hidden')
-            visibleProjects.splice(visibleProjects.indexOf(this), 1)
-            hiddenProjects.push(this)
+    setVisibility(shouldBeVisible) {
+        if (shouldBeVisible) {
+            this.isVisible = true;
+            this.projectCardElement.classList.remove('hidden');
         } else {
-            this.projectCardElement.classList.remove('hidden')
-            hiddenProjects.splice(hiddenProjects.indexOf(this), 1)
-            visibleProjects.push(this)
+            this.isVisible = false;
+            this.projectCardElement.classList.add('hidden');
         }
     }
 }
@@ -150,8 +149,8 @@ async function fetchProjectsData() {
 (async () => {
     const projectsToLoad = await fetchProjectsData();
     projectsToLoad.forEach((project) => {
-        visibleProjects.push(project)
-        project.projectCardElement = addProjectCard(project)
+        project.projectCardElement = addProjectCard(project);
+        projects.push(project);
     });
 })();
 
@@ -162,19 +161,19 @@ roleChoiceElements.forEach((element) => {
 
     element.addEventListener('click', () => {
         // convert the emoji lol
-        let emoji = ''
+        let toggledRole = ''
         switch (element.firstElementChild.textContent) {
             case '🏓game designer🏓':
-                emoji = '🏓'
+                toggledRole = 'gamedesign'
                 break;
             case '🔮programmer🔮':
-                emoji = '🔮'
+                toggledRole = 'programming'
                 break;
             case '🎷composer🎷':
-                emoji = '🎷'
+                toggledRole = 'composing'
                 break;
             case '🦚3D artist🦚':
-                emoji = '🦚'
+                toggledRole = 'art'
                 break;
             default:
                 break;
@@ -187,29 +186,10 @@ roleChoiceElements.forEach((element) => {
 
         // add or remove the clicked element
         if (element.classList.toggle('spotlighted')) {
-            spotlightedRoles.push(emoji)
+            spotlightedRoles.push(toggledRole)
 
-            // filter out the visible projects
-            visibleProjects.forEach((project) => {
-                if (!project.roles.includes(emoji)) {
-                    project.setHidden(true)
-                }
-            });
         } else {
-            spotlightedRoles.splice(spotlightedRoles.indexOf(emoji), 1)
-
-            // filter back in the hidden projects
-            hiddenProjects.forEach((project) => {
-                projectHasAllTheRoles = true
-                spotlightedRoles.forEach((role) => {
-                    if (!project.roles.includes(role)) {
-                        projectHasAllTheRoles = false;
-                    }
-                })
-                if (projectHasAllTheRoles) {
-                    project.setHidden(false)
-                }
-            });
+            spotlightedRoles.splice(spotlightedRoles.indexOf(toggledRole), 1)
         }
 
         // if we have un-spotlighted the last spotlighted roleChoiceElement...
@@ -217,8 +197,18 @@ roleChoiceElements.forEach((element) => {
             setNoneSelectedState(true);
         }
 
-        console.log(visibleProjects)
-        console.log(hiddenProjects)
         console.log(spotlightedRoles)
+
+        // handle the hiding and showing of projects
+        projects.forEach((project) => {
+            project.setVisibility(true);
+
+            spotlightedRoles.forEach((role) => {
+                // console.log(`${role} rating for ${project.title} is ${project.roles[role]}`)
+                if (project.roles[role] == 0) {
+                    project.setVisibility(false);
+                }
+            });            
+        });
     });
 })
