@@ -43,6 +43,11 @@ function addProjectCard(projectDatapoint) {
     const projectCard = document.createElement('div');
     projectCard.classList.add('project-card');
 
+    // make it so that when you click on the project card, the user is directed to the appropriate page
+    projectCard.addEventListener('click', function () {
+        window.location.href = `projects/${projectDatapoint.title}`;
+    });
+
     // Create the "role-icons" container and its child elements
     const roleIconsContainer = document.createElement('div');
     roleIconsContainer.classList.add('role-icons');
@@ -196,8 +201,6 @@ roleChoiceElements.forEach((element) => {
         if (spotlightedRoles.length === 0) {
             setNoneSelectedState(true);
         }
-
-        console.log(spotlightedRoles)
 
         // handle the hiding and showing of projects
         projects.forEach((project) => {

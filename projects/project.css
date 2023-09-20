@@ -1,0 +1,100 @@
+:root {
+  --white: rgb(255, 255, 255);
+  --lightest-gray: rgb(223, 223, 223);
+  --light-gray: rgb(191, 191, 191);
+  --lightish-gray: rgb(159, 159, 159);
+  --gray: rgb(127, 127, 127);
+  --darkish-gray: rgb(95, 95, 95);
+  --dark-gray: rgb(63, 63, 63);
+  --darkest-gray: rgb(31, 31, 31);
+  --black: rgb(0, 0, 0);
+
+  --gamedesign-color: rgb(255, 191, 225);
+  --programming-color: rgb(159, 127, 223);
+  --composing-color: rgb(255, 240, 127);
+  --art-color: rgb(172, 255, 127);
+}
+
+body {
+  text-align: center;
+  font-family: "Palatino Linotype", 'Times New Roman', Times, serif;
+  background-color: var(--dark-gray);
+}
+
+h1 {
+  font-weight: normal;
+  font-size: 5em;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  color: var(--white);
+}
+
+.backbone {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-color: var(--white);
+  max-width: 850px;
+
+  margin: 1em;
+  padding: 1.2em;
+
+  border: 0.5em solid var(--light-gray);
+}
+
+.section.gamedesign {
+  border: 0.5em solid var(--gamedesign-color);
+}
+
+.section.programming {
+  border: 0.5em solid var(--programming-color);
+}
+
+.section.composing {
+  border: 0.5em solid var(--composing-color);
+}
+
+.section.art {
+  border: 0.5em solid var(--art-color);
+}
+
+.section h1 {
+  color: var(--dark-gray);
+  font-size: 2.5em;
+
+  padding: 0;
+  margin: 0em;
+
+  /* background-color: purple; */
+}
+
+.section p {
+  color: var(--dark-gray);
+
+  padding: 0;
+  /* margin: 0em; */
+  margin: 1em 0 0 0;
+  font-size: 1.2em;
+}
+
+@media (max-width: 800px) {
+  body {
+    font-size: 0.85em;
+  }
+}
+
+@media (max-width: 500px) {
+  body {
+    font-size: 0.7em;
+  }
+}
