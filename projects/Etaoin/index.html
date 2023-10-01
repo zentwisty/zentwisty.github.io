@@ -7,7 +7,7 @@
     <meta name="theme-color" content="#1f1f1f"> <!-- sets the URL bar color for mobile -->
     <link rel="stylesheet" href="../project.css">
     <title>Etaoin</title>
-    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="shortcut icon" href="../../images/favicon.ico">
 </head>
 
 <body>
@@ -16,30 +16,13 @@
     </h1>
     <div class="backbone">
         <div class="section">
-            <div class="image-container">
-                <img src="thumbnail.gif" alt="gif showing a sample of Etaoin visually only" />
+            <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/gH3e4EEiv3o?si=4cid8QkZKVjbRC-r"
+                    frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
             </div>
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.
-            </p>
-        </div>
-        <div class="section gamedesign">
-            <h1>
-                Game Design
-            </h1>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </p>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.
-            </p>
-        </div>
-        <div class="section programming">
-            <h1>
-                Programming
-            </h1>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.
+                For my final project for MUSC 1210: Real-Time Systems, I created a project using Max/MSP/Jitter that the
+                26 letters of the alphabet as input and converts them into a chord sequence and a melody. This project was finished on June 25, 2022.
             </p>
         </div>
         <div class="section composing">
@@ -47,21 +30,57 @@
                 Composing
             </h1>
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.
+                The next chord in the sequence is generated in realtime based on how likely the next typed letter is to
+                follow the previous letter (<a
+                    href="http://homepages.math.uic.edu/~leon/mcs425-s08/handouts/char_freq2.pdf">here's the data I used
+                    to calculate that</a>).
+                The melody is generated on top of the chords based on how frequently that letter is used in English
+                overall (<a href="https://en.wikipedia.org/wiki/Letter_frequency">and here's the data for that</a>).
             </p>
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.
+                I associated each of the relative frequencies between pairs of letters with chord movements that were equally as
+                common or uncommon. I used my music theory knowledge (as well as personal preference) to order chord
+                movements on how common/sonorous I thought they were, while also limiting the chords to only major and
+                minor triads for simplicity.
             </p>
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.
+                For example, if we are currently on a major triad, the 1st most common
+                movement is to another major triad a perfect 4th away, the 2nd most common movement is to another major
+                triad a perfect 5th away, etc. and then I also specified a separate list if our current chord is a minor triad. 
+            </p>
+            <p>
+                With 12 possible intervals to move between and the next chords being able to be major or minor, we had 24
+                different options, which was just 2 short of the 26 we need to account for every letter combination, so
+                I made it so that the 25th and 26th most common options map to a random frequency move (within an
+                octave) in the root, and the two options are whether they are major or minor. 
+                (Also note that if a
+                letter combination does not exist, like xg, jq, vh, those will automatically be mapped to the least
+                common chord movement option, thus their movement is always random.) 
+            </p>
+            <p>
+                I followed a very similar process to calculate the melody. The difference is that the melody note
+                considers the root note and the quality of the chord, then just chooses an interval above it, which
+                gives us 12 intervals + 1 random, so I just had 2 letters each map to the same interval (E and T map to
+                the root, A and O map to a perfect 5th, ... Q and Z map to random frequencies).
             </p>
         </div>
-        <div class="section art">
+        <div class="section programming">
             <h1>
-                3D Art
+                Programming
             </h1>
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.
+                This project was created as an interactive Max patch. I followed my specifications for the chord and melody movement mentioned above, encoding it using Max/MSP/Jitter.
+            </p>
+            <p>
+                I also took the data from the sources linked above, and I processed it because I couldn't just use the percent frequency given;
+                I needed their relative frequencies to each other (i.e. following W for example, A is the 1st most
+                common, H is the 2nd most common, etc). I did this by writing a python script to read in .csv
+                files.
+            </p>
+            <p>
+                I'd like to point out that for the actual sound production, because I was using frequencies instead of pitches, I was able to
+                implement just intonation of the chords, which I think made it sound a bit nicer. I also decided to
+                use a piano sample to play the chords.
             </p>
         </div>
     </div>

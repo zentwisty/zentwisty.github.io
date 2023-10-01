@@ -416,37 +416,3 @@ h1 {
     font-size: calc(0.94em * 0.67);
   }
 }
-
-/* @media (max-width: 1023px) {
-  h1 {
-    font-size: 2.9em;
-  }
-  .intro {
-    font-size: 1em;
-  }
-  .role-choice {
-    font-size: 1em;
-  }
-  .project-card {
-    width: 320px;
-    height: 320px;
-    font-size: 0.8em;
-  }
-}
-
-@media (max-width: 767px) {
-  h1 {
-    font-size: 2em;
-  }
-  .intro {
-    font-size: 0.8em;
-  }
-  .role-choice {
-    font-size: 1em;
-  }
-  .project-card {
-    width: 252px;
-    height: 252px;
-    font-size: 0.6em;
-  }
-} */
